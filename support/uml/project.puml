@@ -1,0 +1,39 @@
+@startuml
+class Deck {
+    +Deck()
+    +getNextCard()
+
+}
+
+class Card {
+    +Card(int, int)
+    +Print()
+    -toString()
+    -int suit
+    -int val
+}
+
+class CardDecorator{
+    +CardDecorator()
+}
+
+class Simulation {
+    +Deal()
+    +reset()
+
+}
+
+class EventHandler {
+    +HandleBet()
+}
+
+class MyPanel {
+    +MyPanel()
+}
+
+CardDecorator *-- Card
+Deck o-- Card
+MyPanel --> Simulation
+Simulation --> Deck : controls
+Simulation --> EventHandler
+@enduml
