@@ -1,20 +1,18 @@
 @startuml
-class Deck {
-    +Deck()
+class Shoe {
+    -ArrayList<CardDecorator> shoe
+    +Shoe()
     +getNextCard()
-
+    +printShoe()
+    +setShoe()
 }
 
 class Card {
     +Card(int, int)
     +Print()
-    -toString()
+    +getImagePath()
     -int suit
     -int val
-}
-
-class CardDecorator{
-    +CardDecorator()
 }
 
 class Simulation {
@@ -36,9 +34,9 @@ class Runner {
 }
 
 CardDecorator *-- Card
-Deck o-- Card
+Shoe o-- Card
 MyPanel --> Simulation
-Simulation --> Deck : controls
+Simulation --> Shoe : controls
 Simulation --> EventHandler
 Runner o-- MyPanel
 @enduml
