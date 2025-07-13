@@ -32,8 +32,9 @@ public class Card {
 		this.suit = suit;
 	}
 
-	// forms a string from the card data and has output <number> of <suit> for cards
-	public String toString() {
+	// forms a string from the card data and has output <value>_of_<suit> for cards
+	// tomatch the correct card image
+	public String getImagePath() {
 		String valueString = this.value + "";
 		String suit = "";
 
@@ -73,7 +74,7 @@ public class Card {
 				break;
 		}
 
-		return valueString + " of " + suit;
+		return valueString + "_of_" + suit;
 	}
 
 	// print method prints string data of the card

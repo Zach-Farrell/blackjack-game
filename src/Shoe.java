@@ -31,6 +31,10 @@ public class Shoe {
 
 	// sets the shoe with 6 decks of 52 cards shuffled together
 	public void setShoe() {
+
+		// clear the Shoe of any cards
+		shoe.clear();
+
 		// loop i = 0 - 5 for the 6 shoes that casinos combine for a blackjack shoe
 		// loop j = 0 - 3 for 4 suits of cards
 		// loop k = 2 - 14 for 2 - A cards in each suit
