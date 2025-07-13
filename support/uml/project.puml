@@ -33,7 +33,6 @@ class Runner {
 	+main()
 }
 
-CardDecorator *-- Card
 Shoe o-- Card
 MyPanel --> Simulation
 Simulation --> Shoe : controls
