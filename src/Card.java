@@ -1,7 +1,7 @@
 /*
  * the Card class represents a single playing card in a standart 52 card deck.
  * Each card is assigned a number value 2-14 or 2-Ace and a suit 0-3 [Spades, hearts, clubs, diamonds]
- * this class provides methods to access card data and is used by the deck class to manage a full deck of cards
+ * this class provides methods to access card data and is used by the shoe class to manage a full 6 decks of cards
  */
 
 public class Card {
@@ -11,7 +11,7 @@ public class Card {
 	private int suit;
 
 	// card constructor that initializes value and suit varaibles
-	public Card(int val, int suit) {
+	public Card(int suit, int val) {
 		this.value = val;
 		this.suit = suit;
 	}
