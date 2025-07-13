@@ -1,5 +1,5 @@
 import javax.swing.JPanel;
 
-public class Mypanel extends JPanel{
+public class MyPanel extends JPanel{
 	
 }

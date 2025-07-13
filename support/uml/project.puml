@@ -31,9 +31,14 @@ class MyPanel {
     +MyPanel()
 }
 
+class Runner {
+	+main()
+}
+
 CardDecorator *-- Card
 Deck o-- Card
 MyPanel --> Simulation
 Simulation --> Deck : controls
 Simulation --> EventHandler
+Runner o-- MyPanel
 @enduml
