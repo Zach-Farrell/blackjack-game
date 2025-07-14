@@ -23,7 +23,7 @@ public class Runner {
 		panel.setVisible(true);
 
 		// add custom panel to the JFrame
-		frame.add(panel);
+		frame.setContentPane(panel);
 		frame.setVisible(true);
 
 	}

@@ -1,6 +1,6 @@
 @startuml
 class Shoe {
-    -ArrayList<CardDecorator> shoe
+    -ArrayList<Card> shoe
     +Shoe()
     +getNextCard()
     +printShoe()
