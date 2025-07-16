@@ -2,6 +2,10 @@ import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+/*
+ * The Runner class creates the JFrame for the game. 
+ * This class contains the main function so it is where the simulation, panel, and gamecontroller are instantiated.
+ */
 public class Runner {
 	public static void main(String[] args) {
 

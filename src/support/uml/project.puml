@@ -34,15 +34,21 @@ class Runner {
 	+main()
 }
 
-class GameController() {
+class GameController {
     +GameController(Simulation s, MyPanel p)
     -Simulation sim
     -MyPanel p
 }
 
+class Hand {
+
+}
+
 Shoe o-- Card
+Hand o-- Card
 MyPanel --> Simulation
 Simulation --> Shoe : controls
+Simulation --> Hand : controls
 Simulation --> EventHandler
 Runner o-- MyPanel
 GameController --> MyPanel : Manages
