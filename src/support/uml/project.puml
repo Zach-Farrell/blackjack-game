@@ -1,6 +1,6 @@
 @startuml
 class Shoe {
-    -ArrayList<CardDecorator> shoe
+    -ArrayList<Card> shoe
     +Shoe()
     +getNextCard()
     +printShoe()
@@ -26,16 +26,31 @@ class EventHandler {
 }
 
 class MyPanel {
-    +MyPanel()
+    +MyPanel(Simulation s)
+    -Simulation sim
 }
 
 class Runner {
 	+main()
 }
 
+class GameController {
+    +GameController(Simulation s, MyPanel p)
+    -Simulation sim
+    -MyPanel p
+}
+
+class Hand {
+
+}
+
 Shoe o-- Card
+Hand o-- Card
 MyPanel --> Simulation
 Simulation --> Shoe : controls
+Simulation --> Hand : controls
 Simulation --> EventHandler
 Runner o-- MyPanel
+GameController --> MyPanel : Manages
+GameController --> Simulation : Manages
 @enduml

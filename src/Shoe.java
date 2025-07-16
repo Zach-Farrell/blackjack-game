@@ -29,6 +29,10 @@ public class Shoe {
 		}
 	}
 
+	public int getNumCards() {
+		return shoe.size();
+	}
+
 	// sets the shoe with 6 decks of 52 cards shuffled together
 	public void setShoe() {
 
