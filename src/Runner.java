@@ -4,6 +4,15 @@ import java.awt.Toolkit;
 
 public class Runner {
 	public static void main(String[] args) {
+
+		Simulation sim = new Simulation();
+
+		// instantiate the custom panel with game content and set to visible
+		MyPanel panel = new MyPanel(sim);
+		panel.setVisible(true);
+
+		GameController gameController = new GameController(sim, panel);
+
 		// create the frame for the game
 		JFrame frame = new JFrame("Blackjack");
 
@@ -17,10 +26,6 @@ public class Runner {
 
 		// default to terminating the program when the frame is closed
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// instantiate the custom panel with game content and set to visible
-		MyPanel panel = new MyPanel();
-		panel.setVisible(true);
 
 		// add custom panel to the JFrame
 		frame.setContentPane(panel);

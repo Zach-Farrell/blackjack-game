@@ -26,11 +26,18 @@ class EventHandler {
 }
 
 class MyPanel {
-    +MyPanel()
+    +MyPanel(Simulation s)
+    -Simulation sim
 }
 
 class Runner {
 	+main()
+}
+
+class GameController() {
+    +GameController(Simulation s, MyPanel p)
+    -Simulation sim
+    -MyPanel p
 }
 
 Shoe o-- Card
@@ -38,4 +45,6 @@ MyPanel --> Simulation
 Simulation --> Shoe : controls
 Simulation --> EventHandler
 Runner o-- MyPanel
+GameController --> MyPanel : Manages
+GameController --> Simulation : Manages
 @enduml

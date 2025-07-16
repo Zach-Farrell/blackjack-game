@@ -10,8 +10,10 @@ import javax.swing.*;
 
 public class MyPanel extends JPanel {
 	private BufferedImage img;
+	private Simulation sim;
 
-	public MyPanel() {
+	public MyPanel(Simulation sim) {
+		this.sim = sim;
 		// ImageIcon icon = new ImageIcon(imgURL);
 		// JLabel thumb = new JLabel();
 		// thumb.setIcon(icon);
