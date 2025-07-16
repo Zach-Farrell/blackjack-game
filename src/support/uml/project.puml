@@ -46,11 +46,12 @@ class Hand {
 
 Shoe o-- Card
 Hand o-- Card
-MyPanel --> Simulation
 Simulation --> Shoe : controls
 Simulation --> Hand : controls
 Simulation --> EventHandler
-Runner o-- MyPanel
+Runner --> MyPanel
+Runner --> Simulation
+Runner --> GameController
 GameController --> MyPanel : Manages
 GameController --> Simulation : Manages
 @enduml
