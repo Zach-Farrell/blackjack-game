@@ -21,10 +21,6 @@ class Simulation {
 
 }
 
-class EventHandler {
-    +HandleBet()
-}
-
 class MyPanel {
     +MyPanel(Simulation s)
     -Simulation sim
@@ -41,7 +37,9 @@ class GameController {
 }
 
 class Hand {
-
+    -ArrayList<Card> Hand
+    -int score
+    
 }
 
 Shoe o-- Card
