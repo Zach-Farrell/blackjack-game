@@ -17,11 +17,19 @@ public class Simulation {
 		dealer = new Hand();
 		chips = 100;
 		curBet = 5;
-		startNewRound();
+		startNewRound(curBet);
+	}
+
+	public Hand getPlayer() {
+		return player;
+	}
+
+	public Hand getDealer() {
+		return dealer;
 	}
 
 	// reset the game state other than the shoe which stays constant until empty.
-	public void startNewRound() {
+	public void startNewRound(int bet) {
 		chips -= curBet;
 		player.reset();
 		dealer.reset();
@@ -36,12 +44,15 @@ public class Simulation {
 	}
 
 	// simulate the dealer when the player chooses the stand option.
-	public void stand() {
-		simulaterDealer();
+	public int stand() {
+		return simulaterDealer();
 	}
 
-	public boolean doubleDown() {
-		return false;
+	public int doubleDown() {
+		chips -= curBet;
+		curBet *= 2;
+		player.addCard(shoe.getNextCard());
+		return simulaterDealer();
 	}
 
 	// plays the hand of the dealer once the player is done. Return 0 if the dealer

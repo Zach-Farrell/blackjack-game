@@ -48,7 +48,6 @@ Shoe o-- Card
 Hand o-- Card
 Simulation --> Shoe : controls
 Simulation --> Hand : controls
-Simulation --> EventHandler
 Runner --> MyPanel
 Runner --> Simulation
 Runner --> GameController
