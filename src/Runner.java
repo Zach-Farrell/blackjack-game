@@ -9,10 +9,13 @@ import java.awt.Toolkit;
 public class Runner {
 	public static void main(String[] args) {
 
+		// size of the user screen
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
 		Simulation sim = new Simulation();
 
 		// instantiate the custom panel with game content and set to visible
-		MyPanel panel = new MyPanel(sim);
+		MyPanel panel = new MyPanel(sim, screenSize);
 		panel.setVisible(true);
 
 		GameController gameController = new GameController(sim, panel);
@@ -21,8 +24,7 @@ public class Runner {
 		JFrame frame = new JFrame("Blackjack");
 
 		// on start, size the frame to the screen size
-		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setBounds(0, 0, (int) size.getWidth(), (int) size.getHeight());
+		frame.setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
 		frame.setLayout(null);
 
 		// allow the frame to be resized by the user
