@@ -11,24 +11,14 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class MyPanel extends JPanel {
-	private BufferedImage img;
+	private BufferedImage background;
 	private Simulation sim;
 	private Dimension screenSize;
 
 	public MyPanel(Simulation sim, Dimension screenSize) {
 		this.sim = sim;
 		this.screenSize = screenSize;
-
-		try (InputStream in = getClass()
-				.getClassLoader()
-				.getResourceAsStream("support/Blackjack_Background.jpg")) {
-			if (in == null) {
-				throw new IllegalArgumentException("Resource not found!");
-			}
-			img = ImageIO.read(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		drawBackground();
 	}
 
 	@Override
@@ -36,10 +26,23 @@ public class MyPanel extends JPanel {
 		super.paintComponent(g);
 
 		// Draw image scaled to the panel size
-		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		drawHand(g, sim.getDealer(), (int) screenSize.getWidth() / 2 - 100, (int) screenSize.getHeight() / 4);
 		drawHand(g, sim.getPlayer(), (int) screenSize.getWidth() / 2 - 100, (int) screenSize.getHeight() / 2);
 
+	}
+
+	private void drawBackground() {
+		try (InputStream in = getClass()
+				.getClassLoader()
+				.getResourceAsStream("support/Blackjack_Background.jpg")) {
+			if (in == null) {
+				throw new IllegalArgumentException("Resource not found!");
+			}
+			background = ImageIO.read(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void drawHand(Graphics g, Hand hand, int x, int y) {

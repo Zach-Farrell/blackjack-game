@@ -1,45 +1,70 @@
 @startuml
 class Shoe {
     -ArrayList<Card> shoe
-    +Shoe()
-    +getNextCard()
-    +printShoe()
-    +setShoe()
+    +Card getNextCard()
+    +void printShoe()
+    +void setShoe()
+    +int getNumCards()
 }
 
 class Card {
-    +Card(int, int)
-    +Print()
-    +getImagePath()
+    +void Print()
+    +String getImagePath()
+    +int getVal()
+    +int getSuit()
     -int suit
     -int val
 }
 
 class Simulation {
-    +Deal()
-    +reset()
-
+    +void Deal()
+    +void startNewRound()
+    +Hand getPlayer()
+    +Hand getDealer()
+    +boolean Hit()
+    +int stand()
+    +int doubleDown()
+    -int simulaterDealer()
+    -boolean checkForBust(hand h)
+    -Shoe shoe
+    -Hand player
+    -Hand dealer
+    -int chips
+    -int curBet
 }
 
 class MyPanel {
     +MyPanel(Simulation s)
+    -void drawBackground()
+    -void drawHand()
     -Simulation sim
+    -Dimension screenSize
+    -BufferedImage background
 }
 
 class Runner {
-	+main()
+	+main(String[] args)
 }
 
 class GameController {
     +GameController(Simulation s, MyPanel p)
+    -void addButtons()
     -Simulation sim
     -MyPanel p
+    -ArrayList<JButton> buttons
 }
 
 class Hand {
+    +int getScore()
+    +void reset()
+    +int getNumCards()
+    +boolean isBlackJack()
+    +void addCard(Card c)
+    +ArrayList<Card> getCards()
+    +boolean determineWinner(Hand h)
     -ArrayList<Card> Hand
-    -int score
-    
+    -int score 
+    -boolean soft
 }
 
 Shoe o-- Card

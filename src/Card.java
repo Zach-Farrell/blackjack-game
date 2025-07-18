@@ -20,16 +20,8 @@ public class Card {
 		return value;
 	}
 
-	public void setVal(int val) {
-		this.value = val;
-	}
-
 	public int getSuit() {
 		return suit;
-	}
-
-	public void setSuit(int suit) {
-		this.suit = suit;
 	}
 
 	// forms a string from the card data and has output <value>_of_<suit> for cards
