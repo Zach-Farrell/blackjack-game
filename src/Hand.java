@@ -76,6 +76,11 @@ public class Hand {
 
 	}
 
+	// returns
+	public ArrayList<Card> getCards() {
+		return hand;
+	}
+
 	// returns true if the current hand is winner, false if the hand argument is the
 	// winner.
 	public boolean determineWinner(Hand h) {

@@ -20,22 +20,14 @@ public class Card {
 		return value;
 	}
 
-	public void setVal(int val) {
-		this.value = val;
-	}
-
 	public int getSuit() {
 		return suit;
-	}
-
-	public void setSuit(int suit) {
-		this.suit = suit;
 	}
 
 	// forms a string from the card data and has output <value>_of_<suit> for cards
 	// tomatch the correct card image
 	public String getImagePath() {
-		String valueString = this.value + "";
+		String imgPath = "support/deck-images/";
 		String suit = "";
 
 		switch (this.suit) {
@@ -58,23 +50,23 @@ public class Card {
 
 		switch (this.value) {
 			case 11:
-				valueString = "jack";
+				imgPath += "jack";
 				break;
 			case 12:
-				valueString = "queen";
+				imgPath += "queen";
 				break;
 			case 13:
-				valueString = "king";
+				imgPath += "king";
 				break;
 			case 14:
-				valueString = "ace";
+				imgPath += "ace";
 				break;
 			default:
-				valueString = this.value + "";
+				imgPath = imgPath + this.value;
 				break;
 		}
 
-		return valueString + "_of_" + suit;
+		return imgPath + "_of_" + suit + ".png";
 	}
 
 	// print method prints string data of the card

@@ -45,6 +45,7 @@ public class GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.startNewRound(10);
+				panel.repaint();
 			}
 
 		});
@@ -54,6 +55,7 @@ public class GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.hit();
+				panel.repaint();
 			}
 
 		});
@@ -63,6 +65,7 @@ public class GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.stand();
+				panel.repaint();
 			}
 
 		});
