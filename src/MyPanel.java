@@ -18,15 +18,6 @@ public class MyPanel extends JPanel {
 	public MyPanel(Simulation sim, Dimension screenSize) {
 		this.sim = sim;
 		this.screenSize = screenSize;
-		// ImageIcon icon = new ImageIcon(imgURL);
-		// JLabel thumb = new JLabel();
-		// thumb.setIcon(icon);
-
-		// try {
-		// img = ImageIO.read(new File("support/Blackjack_Background.jpg"));
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
 
 		try (InputStream in = getClass()
 				.getClassLoader()
@@ -38,8 +29,6 @@ public class MyPanel extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		// updateUI();
 	}
 
 	@Override
@@ -54,6 +43,22 @@ public class MyPanel extends JPanel {
 	}
 
 	private void drawHand(Graphics g, Hand hand, int x, int y) {
-
+		int offset = 0;
+		for (Card c : hand.getCards()) {
+			URL cardUrl = getClass().getClassLoader().getResource(c.getImagePath());
+			if (cardUrl == null) {
+				System.err.println("Card image not found: " + c.getImagePath());
+				continue;
+			}
+			try {
+				Image cardImage = ImageIO.read(cardUrl);
+				Image scaledCard = cardImage.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
+				g.drawImage(scaledCard, x + offset * 25, y, null);
+				offset++;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			offset += 1;
+		}
 	}
 }
