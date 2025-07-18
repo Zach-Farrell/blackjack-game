@@ -54,7 +54,6 @@ public class GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.hit();
-				System.out.println("player hit, hand is now: " + sim.getPlayer().getScore());
 			}
 
 		});
@@ -64,8 +63,6 @@ public class GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.stand();
-				System.out.println("player stand, hand is: " + sim.getPlayer().getScore());
-				System.out.println("dealer hand is: " + sim.getDealer().getScore());
 			}
 
 		});

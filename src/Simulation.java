@@ -87,13 +87,10 @@ public class Simulation {
 	// simulates the initial deal of the game before the player chooses to hit,
 	// stand, double, etc...
 	private void deal() {
-		System.out.println("size of shoe: " + shoe.getNumCards());
 		player.addCard(shoe.getNextCard());
 		dealer.addCard(shoe.getNextCard());
 		player.addCard(shoe.getNextCard());
 		dealer.addCard(shoe.getNextCard());
-		System.out.println("size of shoe: " + shoe.getNumCards());
-		System.out.println("size of player hand: " + player.getNumCards());
 
 		if (player.isBlackJack()) {
 			simulaterDealer();
