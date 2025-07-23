@@ -106,9 +106,32 @@ public class Simulation {
 	}
 
 	public void handleWinner(int winCondition) {
-		if (winCondition == 0) {
-			JOptionPane.showConfirmDialog(null, "Hand Over", "You Lose", JOptionPane.OK_CANCEL_OPTION);
-			startNewRound(curBet);
+		switch (winCondition) {
+			case 0:
+				JOptionPane.showConfirmDialog(null, "Hand Over",
+						"You Lose " + dealer.getScore() + " to " + player.getScore(), JOptionPane.OK_CANCEL_OPTION);
+				startNewRound(curBet);
+				break;
+			case 1:
+				JOptionPane.showConfirmDialog(null, "Hand Over",
+						"You Win " + player.getScore() + " to " + dealer.getScore(), JOptionPane.OK_CANCEL_OPTION);
+				startNewRound(curBet);
+				break;
+			case 2:
+				JOptionPane.showConfirmDialog(null, "Hand Over", "Dealer Busts, you win!",
+						JOptionPane.OK_CANCEL_OPTION);
+				startNewRound(curBet);
+				break;
+			case 3:
+				JOptionPane.showConfirmDialog(null, "Hand Over", "you win with BlackJack!",
+						JOptionPane.OK_CANCEL_OPTION);
+				startNewRound(curBet);
+				break;
+			case 4:
+				JOptionPane.showConfirmDialog(null, "Hand Over",
+						"Push " + player.getScore(), JOptionPane.OK_CANCEL_OPTION);
+				startNewRound(curBet);
+				break;
 		}
 	}
 

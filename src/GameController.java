@@ -64,12 +64,16 @@ public class GameController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int winCondition = sim.stand();
-				panel.repaint();
-				sim.handleWinner(winCondition);
-				panel.repaint();
+				updateUI(sim.stand());
 			}
 
 		});
+
+	}
+
+	private void updateUI(int winCondition) {
+		panel.repaint();
+		sim.handleWinner(winCondition);
+		panel.repaint();
 	}
 }
