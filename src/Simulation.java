@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /*
  * The Simulation class handles all of the processing for the blackjack game.
  * 
@@ -101,6 +103,13 @@ public class Simulation {
 	// return true if the hand is a bust (over 21)
 	private boolean checkForBust(Hand h) {
 		return h.getScore() > 21;
+	}
+
+	public void handleWinner(int winCondition) {
+		if (winCondition == 0) {
+			JOptionPane.showConfirmDialog(null, "Hand Over", "You Lose", JOptionPane.OK_CANCEL_OPTION);
+			startNewRound(curBet);
+		}
 	}
 
 }

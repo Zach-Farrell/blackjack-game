@@ -64,7 +64,9 @@ public class GameController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sim.stand();
+				int winCondition = sim.stand();
+				panel.repaint();
+				sim.handleWinner(winCondition);
 				panel.repaint();
 			}
 
