@@ -54,8 +54,15 @@ public class GameController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sim.hit();
+				if (sim.hit()) {
+					// player busts
+					panel.repaint();
+					sim.displayBoard("You Busted!");
+					sim.startNewRound(sim.getBetAmount());
+				}
+
 				panel.repaint();
+
 			}
 
 		});

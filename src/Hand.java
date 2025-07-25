@@ -81,10 +81,13 @@ public class Hand {
 		return hand;
 	}
 
-	// returns true if the current hand is winner, false if the hand argument is the
-	// winner.
-	public boolean determineWinner(Hand h) {
-
-		return false;
+	// returns 1 if the current hand is winner, -1 if the hand argument is the
+	// winner and 0 if it is a tie.
+	public int determineWinner(Hand h) {
+		if (this.score > h.getScore())
+			return 1;
+		else if (this.score < h.getScore())
+			return -1;
+		return 0;
 	}
 }

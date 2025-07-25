@@ -30,6 +30,14 @@ public class Simulation {
 		return dealer;
 	}
 
+	public void setBetAmount(int newBetAmount) {
+		curBet = newBetAmount;
+	}
+
+	public int getBetAmount() {
+		return curBet;
+	}
+
 	// reset the game state other than the shoe which stays constant until empty.
 	public void startNewRound(int bet) {
 		chips -= curBet;
@@ -42,7 +50,11 @@ public class Simulation {
 	// if the player busts.
 	public boolean hit() {
 		player.addCard(shoe.getNextCard());
-		return checkForBust(player);
+		if (checkForBust(player)) {
+			chips -= curBet;
+			return true;
+		}
+		return false;
 	}
 
 	// simulate the dealer when the player chooses the stand option.
@@ -76,9 +88,12 @@ public class Simulation {
 				return 2;
 			} else {
 				// dealer is done drawing cards. Time to determine the winner.
-				if (player.determineWinner(dealer)) {
+				if (player.determineWinner(dealer) == 1) {
 					// player wins
 					return 1;
+				} else if (player.determineWinner(dealer) == 0) {
+					// push
+					return 4;
 				}
 				// no other ways for player to win, dealer wins.
 				return 0;
@@ -108,31 +123,31 @@ public class Simulation {
 	public void handleWinner(int winCondition) {
 		switch (winCondition) {
 			case 0:
-				JOptionPane.showConfirmDialog(null, "Hand Over",
-						"You Lose " + dealer.getScore() + " to " + player.getScore(), JOptionPane.OK_CANCEL_OPTION);
+				displayBoard("You Lose " + dealer.getScore() + " to " + player.getScore());
 				startNewRound(curBet);
 				break;
 			case 1:
-				JOptionPane.showConfirmDialog(null, "Hand Over",
-						"You Win " + player.getScore() + " to " + dealer.getScore(), JOptionPane.OK_CANCEL_OPTION);
+				displayBoard("You Win " + player.getScore() + " to " + dealer.getScore());
 				startNewRound(curBet);
 				break;
 			case 2:
-				JOptionPane.showConfirmDialog(null, "Hand Over", "Dealer Busts, you win!",
-						JOptionPane.OK_CANCEL_OPTION);
+				displayBoard("Dealer Busts, you win!");
 				startNewRound(curBet);
 				break;
 			case 3:
-				JOptionPane.showConfirmDialog(null, "Hand Over", "you win with BlackJack!",
-						JOptionPane.OK_CANCEL_OPTION);
+				displayBoard("you win with BlackJack!");
 				startNewRound(curBet);
 				break;
 			case 4:
-				JOptionPane.showConfirmDialog(null, "Hand Over",
-						"Push " + player.getScore(), JOptionPane.OK_CANCEL_OPTION);
+				displayBoard("Push " + player.getScore());
 				startNewRound(curBet);
 				break;
 		}
+	}
+
+	public void displayBoard(String msg) {
+		JOptionPane.showConfirmDialog(null, "Hand Over", msg,
+				JOptionPane.OK_CANCEL_OPTION);
 	}
 
 }
