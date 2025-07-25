@@ -12,6 +12,7 @@ public class Simulation {
 	private Hand dealer;
 	private int chips;
 	private int curBet;
+	private boolean dealerRevealed = false;
 
 	public Simulation() {
 		shoe = new Shoe();
@@ -20,6 +21,14 @@ public class Simulation {
 		chips = 100;
 		curBet = 5;
 		startNewRound(curBet);
+	}
+
+	public void revealDealer() {
+		dealerRevealed = true;
+	}
+
+	public boolean isDealerRevealed() {
+		return dealerRevealed;
 	}
 
 	public Hand getPlayer() {
@@ -43,6 +52,7 @@ public class Simulation {
 		chips -= curBet;
 		player.reset();
 		dealer.reset();
+		dealerRevealed = false;
 		deal();
 	}
 
@@ -59,6 +69,7 @@ public class Simulation {
 
 	// simulate the dealer when the player chooses the stand option.
 	public int stand() {
+		revealDealer();
 		return simulaterDealer();
 	}
 

@@ -27,7 +27,7 @@ public class MyPanel extends JPanel {
 
 		// Draw image scaled to the panel size
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-		drawHand(g, sim.getDealer(), (int) screenSize.getWidth() / 2 - 100, (int) screenSize.getHeight() / 4);
+		drawDealerHand(g, sim.getDealer(), (int) screenSize.getWidth() / 2 - 100, (int) screenSize.getHeight() / 4);
 		drawHand(g, sim.getPlayer(), (int) screenSize.getWidth() / 2 - 100, (int) screenSize.getHeight() / 2);
 
 	}
@@ -46,22 +46,48 @@ public class MyPanel extends JPanel {
 	}
 
 	private void drawHand(Graphics g, Hand hand, int x, int y) {
-		int offset = 0;
+		int card = 0;
+		int offset = 25;
 		for (Card c : hand.getCards()) {
-			URL cardUrl = getClass().getClassLoader().getResource(c.getImagePath());
-			if (cardUrl == null) {
-				System.err.println("Card image not found: " + c.getImagePath());
-				continue;
-			}
-			try {
-				Image cardImage = ImageIO.read(cardUrl);
-				Image scaledCard = cardImage.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
-				g.drawImage(scaledCard, x + offset * 25, y, null);
-				offset++;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			offset += 1;
+			Image cardImage = getCardImage(c.getImagePath());
+			g.drawImage(cardImage, x + card * offset, y, null);
+			card++;
 		}
+		offset += 1;
+	}
+
+	private void drawDealerHand(Graphics g, Hand hand, int x, int y) {
+		int card = 0;
+		int offset = 25;
+		for (Card c : hand.getCards()) {
+			if (card == 1 && !sim.isDealerRevealed()) {
+				Image cardImage = getCardImage(c.getBackOfCard());
+				g.drawImage(cardImage, x + card * offset, y, null);
+				card++;
+			} else {
+
+				Image cardImage = getCardImage(c.getImagePath());
+				g.drawImage(cardImage, x + card * offset, y, null);
+				card++;
+			}
+		}
+		offset += 1;
+	}
+
+	private Image getCardImage(String pathToCard) {
+		Image card;
+		URL cardUrl = getClass().getClassLoader().getResource(pathToCard);
+		if (cardUrl == null) {
+			System.err.println("Card image not found: " + pathToCard);
+			return null;
+		}
+		try {
+			card = ImageIO.read(cardUrl).getScaledInstance(100, 150, Image.SCALE_SMOOTH);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return card;
 	}
 }
