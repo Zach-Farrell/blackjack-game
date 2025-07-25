@@ -11,6 +11,7 @@ public class GameController {
 	private Simulation sim;
 	private MyPanel panel;
 	private ArrayList<JButton> buttons;
+	private JPanel buttonPanel;
 
 	/*
 	 * The GameController class contains the simulation and MyPanel instances to
@@ -19,16 +20,14 @@ public class GameController {
 	 * through the simulation ad then update the view through the MyPanel.
 	 * The GameController is modeled after the mvc design pattern.
 	 */
-	public GameController(Simulation sim, MyPanel panel) {
+	public GameController(Simulation sim, MyPanel panel, JPanel buttonPanel) {
 		this.sim = sim;
 		this.panel = panel;
+		this.buttonPanel = buttonPanel;
 		addButtons();
 	}
 
 	private void addButtons() {
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-
 		JButton placeBet = new JButton("place bet");
 		JButton hit = new JButton("hit");
 		JButton stand = new JButton("stand");
@@ -37,8 +36,6 @@ public class GameController {
 		buttonPanel.add(placeBet);
 		buttonPanel.add(hit);
 		buttonPanel.add(stand);
-
-		panel.add(buttonPanel);
 
 		placeBet.addActionListener(new ActionListener() {
 
