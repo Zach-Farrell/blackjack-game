@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /*
  * The Simulation class handles all of the processing for the blackjack game.
  * 
@@ -10,6 +12,7 @@ public class Simulation {
 	private Hand dealer;
 	private int chips;
 	private int curBet;
+	private boolean dealerRevealed = false;
 
 	public Simulation() {
 		shoe = new Shoe();
@@ -20,6 +23,14 @@ public class Simulation {
 		startNewRound(curBet);
 	}
 
+	public void revealDealer() {
+		dealerRevealed = true;
+	}
+
+	public boolean isDealerRevealed() {
+		return dealerRevealed;
+	}
+
 	public Hand getPlayer() {
 		return player;
 	}
@@ -28,11 +39,20 @@ public class Simulation {
 		return dealer;
 	}
 
+	public void setBetAmount(int newBetAmount) {
+		curBet = newBetAmount;
+	}
+
+	public int getBetAmount() {
+		return curBet;
+	}
+
 	// reset the game state other than the shoe which stays constant until empty.
 	public void startNewRound(int bet) {
 		chips -= curBet;
 		player.reset();
 		dealer.reset();
+		dealerRevealed = false;
 		deal();
 	}
 
@@ -40,11 +60,16 @@ public class Simulation {
 	// if the player busts.
 	public boolean hit() {
 		player.addCard(shoe.getNextCard());
-		return checkForBust(player);
+		if (checkForBust(player)) {
+			chips -= curBet;
+			return true;
+		}
+		return false;
 	}
 
 	// simulate the dealer when the player chooses the stand option.
 	public int stand() {
+		revealDealer();
 		return simulaterDealer();
 	}
 
@@ -74,9 +99,12 @@ public class Simulation {
 				return 2;
 			} else {
 				// dealer is done drawing cards. Time to determine the winner.
-				if (player.determineWinner(dealer)) {
+				if (player.determineWinner(dealer) == 1) {
 					// player wins
 					return 1;
+				} else if (player.determineWinner(dealer) == 0) {
+					// push
+					return 4;
 				}
 				// no other ways for player to win, dealer wins.
 				return 0;
@@ -101,6 +129,36 @@ public class Simulation {
 	// return true if the hand is a bust (over 21)
 	private boolean checkForBust(Hand h) {
 		return h.getScore() > 21;
+	}
+
+	public void handleWinner(int winCondition) {
+		switch (winCondition) {
+			case 0:
+				displayBoard("You Lose " + dealer.getScore() + " to " + player.getScore());
+				startNewRound(curBet);
+				break;
+			case 1:
+				displayBoard("You Win " + player.getScore() + " to " + dealer.getScore());
+				startNewRound(curBet);
+				break;
+			case 2:
+				displayBoard("Dealer Busts, you win!");
+				startNewRound(curBet);
+				break;
+			case 3:
+				displayBoard("you win with BlackJack!");
+				startNewRound(curBet);
+				break;
+			case 4:
+				displayBoard("Push " + player.getScore());
+				startNewRound(curBet);
+				break;
+		}
+	}
+
+	public void displayBoard(String msg) {
+		JOptionPane.showConfirmDialog(null, "Hand Over", msg,
+				JOptionPane.OK_CANCEL_OPTION);
 	}
 
 }

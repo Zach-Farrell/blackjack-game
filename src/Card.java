@@ -69,6 +69,10 @@ public class Card {
 		return imgPath + "_of_" + suit + ".png";
 	}
 
+	public String getBackOfCard() {
+		return "support/deck-images/back_of_card.png";
+	}
+
 	// print method prints string data of the card
 	public void print() {
 		System.out.println(toString());
