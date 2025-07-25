@@ -18,7 +18,7 @@ public class MyPanel extends JPanel {
 	public MyPanel(Simulation sim, Dimension screenSize) {
 		this.sim = sim;
 		this.screenSize = screenSize;
-		drawBackground();
+		setBackground();
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class MyPanel extends JPanel {
 
 	}
 
-	private void drawBackground() {
+	private void setBackground() {
 		try (InputStream in = getClass()
 				.getClassLoader()
 				.getResourceAsStream("support/Blackjack_Background.jpg")) {
