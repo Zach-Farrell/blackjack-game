@@ -82,7 +82,7 @@ public class Simulation {
 
 	// plays the hand of the dealer once the player is done. Return 0 if the dealer
 	// wins, 1 if the player's score beats the dealer's, 2 if the dealer busts, and
-	// 3 if the player had blackjack
+	// 3 if the player had blackjack, 4 for a push, and 5 for if the dealer had a blackjacks
 	private int simulaterDealer() {
 		if (player.isBlackJack() && !dealer.isBlackJack()) {
 			// if the player has a blackjack and the dealer does not then there is no need
@@ -97,7 +97,10 @@ public class Simulation {
 			} else if (checkForBust(dealer)) {
 				// dealer busts.
 				return 2;
-			} else {
+			} else if(dealer.isBlackJack()) {
+				return 5;
+			}
+			else {
 				// dealer is done drawing cards. Time to determine the winner.
 				if (player.determineWinner(dealer) == 1) {
 					// player wins
@@ -151,6 +154,10 @@ public class Simulation {
 				break;
 			case 4:
 				displayBoard("Push " + player.getScore());
+				startNewRound(curBet);
+				break;
+			case 5:
+				displayBoard("Dealer had blackjack");
 				startNewRound(curBet);
 				break;
 		}
