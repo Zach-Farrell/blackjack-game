@@ -22,7 +22,7 @@ import javax.swing.*;
  *        It integrates with the Simulation class to get game state and updates
  *        dynamically.
  */
-public class MyPanel extends JPanel {
+public class GamePanel extends JPanel {
 	private BufferedImage background; /// < Background image of the game table
 	private Simulation sim; /// < Simulation object containing game state
 	private Dimension screenSize; /// < Screen size used for layout calculations
@@ -34,7 +34,7 @@ public class MyPanel extends JPanel {
 	 * @param sim        The Simulation object containing game logic and state.
 	 * @param screenSize The screen size used to scale elements.
 	 */
-	public MyPanel(Simulation sim, Dimension screenSize) {
+	public GamePanel(Simulation sim, Dimension screenSize) {
 		this.sim = sim;
 		this.screenSize = screenSize;
 		setBackground();

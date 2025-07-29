@@ -30,7 +30,7 @@ public class Runner {
 		Simulation sim = new Simulation();
 
 		// Create the custom game panel (view) and make it visible
-		MyPanel panel = new MyPanel(sim, screenSize);
+		GamePanel panel = new GamePanel(sim, screenSize);
 		panel.setVisible(true);
 
 		// Create the game controller to manage interactions

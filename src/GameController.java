@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class GameController {
 	private Simulation sim;
-	private MyPanel panel;
+	private GamePanel panel;
 	private ArrayList<JButton> buttons;
 
 	/**
@@ -33,7 +33,7 @@ public class GameController {
 	 * @param sim   The Simulation instance representing game logic.
 	 * @param panel The MyPanel instance representing the user interface.
 	 */
-	public GameController(Simulation sim, MyPanel panel) {
+	public GameController(Simulation sim, GamePanel panel) {
 		this.sim = sim;
 		this.panel = panel;
 		addButtons();
