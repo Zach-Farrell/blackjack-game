@@ -2,39 +2,57 @@ import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-/*
- * The Runner class creates the JFrame for the game. 
- * This class contains the main function so it is where the simulation, panel, and gamecontroller are instantiated.
+/**
+ * @class Runner
+ * @brief Initializes and runs the Blackjack game application.
+ * 
+ *        This class contains the main method which sets up the JFrame window,
+ *        creates the game simulation, UI panel, and controller, and starts the
+ *        game.
  */
 public class Runner {
+	/**
+	 * @brief The program entry point.
+	 * 
+	 *        Initializes the simulation, creates the main game panel and
+	 *        controller,
+	 *        sets up the JFrame window with appropriate size and behavior, then
+	 *        displays it.
+	 * 
+	 * @param args Command-line arguments (not used).
+	 */
 	public static void main(String[] args) {
 
-		// size of the user screen
+		// Get the size of the user screen
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
+		// Create the game simulation (model)
 		Simulation sim = new Simulation();
 
-		// instantiate the custom panel with game content and set to visible
+		// Create the custom game panel (view) and make it visible
 		MyPanel panel = new MyPanel(sim, screenSize);
 		panel.setVisible(true);
 
+		// Create the game controller to manage interactions
 		GameController gameController = new GameController(sim, panel);
 
-		// create the frame for the game
+		// Create the main JFrame for the game window
 		JFrame frame = new JFrame("Blackjack");
 
-		// on start, size the frame to the screen size
+		// Set the frame size to fill the entire screen
 		frame.setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
 		frame.setLayout(null);
 
-		// allow the frame to be resized by the user
+		// Allow user to resize the window
 		frame.setResizable(true);
 
-		// default to terminating the program when the frame is closed
+		// Exit the program when the window is closed
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// add custom panel to the JFrame
+		// Add the custom game panel as the content pane of the JFrame
 		frame.setContentPane(panel);
+
+		// Make the frame visible on screen
 		frame.setVisible(true);
 
 	}

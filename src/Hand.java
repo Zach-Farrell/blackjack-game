@@ -1,61 +1,95 @@
 import java.util.ArrayList;
 
-/*
- * the Hand class represents the player and dealers hands in the blackjack game
- * it contains variables and functions to allow the total score to be calculated for a hand.
+/**
+ * @class Hand
+ * @brief Represents a hand of cards for the player or dealer in Blackjack.
+ * 
+ *        This class maintains the list of cards in the hand, calculates the
+ *        total score,
+ *        and tracks whether the hand is "soft" (i.e., contains an Ace counted
+ *        as 11).
  */
 public class Hand {
-	/*
-	 * The hand variable holds the card data for the hand.
-	 * the score variable represents the total score of the hand based on which
-	 * cards are in the hand.
-	 * the soft variable tracks whether a hand's score can be reduced by ten if an
-	 * ace would cause the hand to bust.
-	 * True for if a hand has an ace which is an 11 or 1
+	/**
+	 * @brief List of Card objects currently in the hand.
 	 */
 	private ArrayList<Card> hand;
+
+	/**
+	 * @brief The current total score of the hand.
+	 */
 	private int score;
+
+	/**
+	 * @brief True if the hand contains an Ace counted as 11 (soft hand).
+	 */
 	boolean soft;
 
-	// constructor for initializing variables.
+	/**
+	 * @brief Constructs a new empty hand.
+	 */
 	public Hand() {
 		reset();
 	}
 
-	// returns the total score of the hand.
+	/**
+	 * @brief Returns the current score of the hand.
+	 * @return The total numeric score of the hand.
+	 */
 	public int getScore() {
 		return score;
 	}
 
-	// resets the hand.
+	/**
+	 * @brief Resets the hand by clearing all cards and resetting score and soft
+	 *        flag.
+	 */
 	public void reset() {
 		hand = new ArrayList<Card>();
 		score = 0;
 		soft = false;
 	}
 
-	// return the current number of cards in the hand
+	/**
+	 * @brief Returns the number of cards currently in the hand.
+	 * @return The count of cards.
+	 */
 	public int getNumCards() {
 		return hand.size();
 	}
 
+	/**
+	 * @brief Returns whether the hand is soft (contains an Ace counted as 11).
+	 * @return True if the hand is soft, false otherwise.
+	 */
 	public boolean isSoft() {
 		return soft;
 	}
 
-	// return true if the hand is a blackjack
+	/**
+	 * @brief Returns true if the hand is a blackjack (score 21 with exactly two
+	 *        cards).
+	 * @return True if blackjack, false otherwise.
+	 */
 	public boolean isBlackJack() {
 		return score == 21 && hand.size() == 2;
 	}
 
-	// adds the given card to the hand and updates score/hard variables accordingly.
+	/**
+	 * @brief Adds a card to the hand and updates the score and soft flag.
+	 * 
+	 *        Face cards (Jack, Queen, King) count as 10.
+	 *        Ace counts as 11 if it does not cause bust; otherwise as 1.
+	 *        Adjusts score if hand would bust but contains a soft Ace.
+	 * 
+	 * @param c The Card to add to the hand.
+	 */
 	public void addCard(Card c) {
 		if (c.getVal() > 10 && c.getVal() < 14) {
-			// jack, queen, king facecards are added as 10 score.
+			// Jack, Queen, King count as 10
 			score += 10;
 		} else if (c.getVal() == 14) {
-			// if the card is an ace, check to see if the card should be added as 1 or 11.
-			// set soft variable to true if ace is added as 11
+			// Ace counts as 11 if possible, otherwise 1
 			if (score < 11) {
 				score += 11;
 				soft = true;
@@ -63,26 +97,33 @@ public class Hand {
 				score += 1;
 			}
 		} else {
-			// if the card is neither ace nor facecard then add the card value to score.
+			// Number cards count as their face value
 			score += c.getVal();
 		}
-		// if the hand would be a bust and contains an ace of value 11 then subtract 10
-		// from the score.
+
+		// Adjust if bust and soft hand (convert Ace from 11 to 1)
 		if (score > 21 && soft) {
 			score -= 10;
 			soft = false;
 		}
-		hand.add(c);
 
+		hand.add(c);
 	}
 
-	// returns
+	/**
+	 * @brief Returns the list of cards in the hand.
+	 * @return An ArrayList of Card objects.
+	 */
 	public ArrayList<Card> getCards() {
 		return hand;
 	}
 
-	// returns 1 if the current hand is winner, -1 if the hand argument is the
-	// winner and 0 if it is a tie.
+	/**
+	 * @brief Compares this hand with another hand to determine the winner.
+	 * 
+	 * @param h The hand to compare against.
+	 * @return 1 if this hand wins, -1 if the argument hand wins, 0 if tie.
+	 */
 	public int determineWinner(Hand h) {
 		if (this.score > h.getScore())
 			return 1;
